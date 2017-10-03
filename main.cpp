@@ -4,6 +4,8 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+bool running = true;
+
 int main(int argc, char*  args[])
 {
 	SDL_Window* window = NULL;
@@ -24,8 +26,18 @@ int main(int argc, char*  args[])
 			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 
 			SDL_UpdateWindowSurface(window);
-			SDL_Delay(2000);
-			
+		
+			SDL_Event e;
+			while(running)
+			{
+				while(SDL_PollEvent(&e) != 0)
+				{
+					if(e.type == SDL_QUIT)
+					{
+						running = false;
+					}
+				}
+			}	
 			SDL_DestroyWindow(window);
 			SDL_Quit();
 			return 0;
