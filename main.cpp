@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include "pair.cpp"
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -26,7 +27,10 @@ int main(int argc, char*  args[])
 			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 
 			SDL_UpdateWindowSurface(window);
-		
+			
+			Pair p("a5");
+			printf("Rank : %d and file : %d", p.getRank(), p.getFile());
+					
 			SDL_Event e;
 			while(running)
 			{
