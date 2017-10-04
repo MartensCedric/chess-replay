@@ -5,6 +5,8 @@
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 
+#include "render.cpp"
+
 bool running = true;
 
 int main(int argc, char*  args[])
@@ -27,10 +29,7 @@ int main(int argc, char*  args[])
 			SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
 
 			SDL_UpdateWindowSurface(window);
-			
-			Pair p("a5");
-			printf("Rank : %d and file : %d", p.getRank(), p.getFile());
-					
+			Render r(window);					
 			SDL_Event e;
 			while(running)
 			{
@@ -41,6 +40,8 @@ int main(int argc, char*  args[])
 						running = false;
 					}
 				}
+				r.drawBoard(0,0,0,0);
+				r.update();
 			}	
 			SDL_DestroyWindow(window);
 			SDL_Quit();

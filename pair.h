@@ -2,7 +2,7 @@
 class Pair
 {
 	private:
-		int rank;
+ 		int rank;
 		int file;
 		void init(int rank, int file);
 

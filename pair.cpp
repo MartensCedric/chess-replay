@@ -1,6 +1,7 @@
 #include "pair.h"
 #include <string>
 #include <exception>
+
 Pair::Pair(int rank, int file)
 {
 	init(rank, file);
