@@ -1,9 +1,13 @@
+#ifndef PGN_H
+#define PGN_H
+
 #include <string.h>
 class PGN
 {
-	private:
 	std::map<std::string, std::string> metadata;
-	public:
-	std::map<std::string, std::string> getMetadata();
-	
+
+public:
+	const std::map<std::string, std::string>& getMetadata() const;
+
 }
+#endif

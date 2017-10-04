@@ -1,15 +1,25 @@
+#ifndef PAIR_H
+#define PAIR_H
+
 #include <string>
 class Pair
 {
-	private:
- 		int rank;
-		int file;
-		void init(int rank, int file);
+ 	const int rank;
+	const int file;
 
-	public:
-		std::string getNotation();
-		int getRank();
-		int getFile();
-		Pair(int rank, int file);
-		Pair(std::string notation);
+public:
+	Pair(int rank, int file);
+	Pair(const std::string& notation);
+
+	std::string getNotation();
+		
+	int getRank() const;
+	int getFile() const;
+
+private:
+	void ensureValid() const;
+
+	static int getRankFromNotation(const std::string& notation);
+	static int getFileFromNotation(const std::string& notation);
 };
+#endif

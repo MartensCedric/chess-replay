@@ -1,3 +1,4 @@
+#include "globals.h"
 #include "render.h"
 #include <stdio.h>
 

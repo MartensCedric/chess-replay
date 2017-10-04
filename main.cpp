@@ -1,11 +1,8 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
-#include "pair.cpp"
-
-const int SCREEN_WIDTH = 640;
-const int SCREEN_HEIGHT = 480;
-
-#include "render.cpp"
+#include "globals.h"
+#include "pair.h"
+#include "render.h"
 
 bool running = true;
 
@@ -31,6 +28,10 @@ int main(int argc, char*  args[])
 			SDL_UpdateWindowSurface(window);
 			Render r(window);					
 			SDL_Event e;
+			
+			Pair p("c4");
+			printf("Rank %d and file %d", p.getRank(), p.getFile());
+			
 			while(running)
 			{
 				while(SDL_PollEvent(&e) != 0)

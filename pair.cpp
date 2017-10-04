@@ -2,29 +2,25 @@
 #include <string>
 #include <exception>
 
-Pair::Pair(int rank, int file)
+Pair::Pair(int rank, int file) 
+	: rank(rank), file(file) 
 {
-	init(rank, file);
+	ensureValid();
 }
 
-Pair::Pair(std::string notation) 
+Pair::Pair(const std::string& notation) 
+	: rank(getRankFromNotation(notation)),
+	file(getFileFromNotation(notation)) 
 {
-	if(notation.length() != 2)
-	{
-		//throw std::exception("Notation does not have two values");
-	}
-
-	int file = notation[0] - 'a';
-	int rank = notation[1] - '1';
-	init(rank, file);
+	ensureValid();
 }
 
-int Pair::getRank()
+int Pair::getRank() const
 {
 	return this->rank;
 }
 
-int Pair::getFile()
+int Pair::getFile() const
 {
 	return this->file;
 }
@@ -34,14 +30,26 @@ std::string Pair::getNotation()
 	return "";
 }
 
-void Pair::init(int rank, int file)
+void Pair::ensureValid() const
 {
 	if(rank < 0 || rank >= 8 ||
-			file < 0 || file >= 8)
+		file < 0 || file >= 8)
 	{
-		//throw std::exception("Values out of chess board");
+				
+	}
+}
+
+int Pair::getRankFromNotation(const std::string& notation)
+{
+	if(notation.length() != 2)
+	{
+		//throw invalid_argument("invalid notation");
 	}
 
-	this->rank = rank;
-	this->file = file;
+	return notation[1] - '1';
+}
+
+int Pair::getFileFromNotation(const std::string& notation)
+{
+	return notation[0] - 'a';
 }
