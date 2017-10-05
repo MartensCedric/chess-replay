@@ -1,5 +1,6 @@
 #include "render.h" 
 #include <stdio.h>
+#include <SDL2/SDL_ttf.h>
 
 Render::Render(SDL_Window* window)
 {
@@ -13,9 +14,27 @@ Render::Render(SDL_Window* window)
 
 void Render::drawBoard(int x, int y, int w, int h)
 {
-	SDL_Rect fillRect = {x, y, w, h};
-	SDL_SetRenderDrawColor(renderer, 0x9B, 0x4C, 0x00, 0xFF);
-	SDL_RenderFillRect(renderer, &fillRect);
+	for(int i = 0; i < 8; i++)
+	{
+		for(int j = 0; j < 8; j++)
+		{
+			SDL_Rect square = {x, y, w/8, h/8};
+			
+			if((i + j) % 2 == 0)
+			{
+				SDL_SetRenderDrawColor(renderer, 0xFF, 0xFF, 0xFF, 0xFF);
+			}
+			else
+			{
+				SDL_SetRenderDrawColor(renderer, 0x9B, 0x4C, 0x00, 0xFF);
+			}
+
+			square.x = x + j * square.w;
+			square.y = y + i * square.h;
+	
+			SDL_RenderFillRect(renderer, &square);
+		}
+	}	
 }
 
 void Render::clear()

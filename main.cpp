@@ -10,7 +10,8 @@ int main(int argc, char*  args[])
 {
 	Screen* screen = new Screen(800, 600);
 	screen->createWindow();	
-	Render r(screen->getWindow());
+	Render render(screen->getWindow());
+	
 	SDL_Event e;
 
 	while(running)
@@ -22,10 +23,11 @@ int main(int argc, char*  args[])
 				running = false;
 			}
 		}
-		r.clear(0x00, 0x00, 0x00, 0xFF);
-		r.drawBoard(50, 50, 550, 550);
-		r.update();
-	}	
+		render.clear(0x00, 0x00, 0x00, 0xFF);
+		render.drawBoard(56, 56, 544, 544);
+		render.update();
+	}
+	
 	screen->close();
 	return 0;
 }
