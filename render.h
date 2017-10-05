@@ -10,6 +10,8 @@ class Render
 	public:
 	Render(SDL_Window* window);
 	void drawBoard(int x, int y, int w, int h);
+	void clear(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
+	void clear();
 	void update();
 };
 #endif

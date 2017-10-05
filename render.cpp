@@ -1,4 +1,4 @@
-#include "render.h"
+#include "render.h" 
 #include <stdio.h>
 
 Render::Render(SDL_Window* window)
@@ -13,12 +13,20 @@ Render::Render(SDL_Window* window)
 
 void Render::drawBoard(int x, int y, int w, int h)
 {
-	SDL_SetRenderDrawColor(this->renderer, 0xFF, 0xFF, 0xFF, 0xFF);
-	SDL_RenderClear(this->renderer);
-
-	SDL_Rect fillRect = {640/4, 480/4, 640/2, 480/2};
-	SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
+	SDL_Rect fillRect = {x, y, w, h};
+	SDL_SetRenderDrawColor(renderer, 0x9B, 0x4C, 0x00, 0xFF);
 	SDL_RenderFillRect(renderer, &fillRect);
+}
+
+void Render::clear()
+{
+	this->clear(0xFF, 0xFF, 0xFF, 0xFF);
+}
+
+void Render::clear(Uint8 r, Uint8 g, Uint8 b, Uint8 a)
+{
+	SDL_SetRenderDrawColor(this->renderer, r, g, b, a);
+	SDL_RenderClear(this->renderer);
 }
 
 void Render::update()

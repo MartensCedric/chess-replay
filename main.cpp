@@ -8,7 +8,7 @@ bool running = true;
 
 int main(int argc, char*  args[])
 {
-	Screen* screen = new Screen(640, 480);
+	Screen* screen = new Screen(800, 600);
 	screen->createWindow();	
 	Render r(screen->getWindow());
 	SDL_Event e;
@@ -22,7 +22,8 @@ int main(int argc, char*  args[])
 				running = false;
 			}
 		}
-		r.drawBoard(0,0,0,0);
+		r.clear(0x00, 0x00, 0x00, 0xFF);
+		r.drawBoard(50, 50, 550, 550);
 		r.update();
 	}	
 	screen->close();
