@@ -2,12 +2,13 @@
 #define PGN_H
 
 #include <string.h>
+#include <map>
 class PGN
 {
 	std::map<std::string, std::string> metadata;
 
 public:
-	const std::map<std::string, std::string>& getMetadata() const;
-
-}
+	std::map<std::string, std::string>& getMetadata() { return metadata; }
+	bool hasSTR();
+};
 #endif

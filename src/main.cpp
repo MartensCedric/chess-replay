@@ -3,6 +3,7 @@
 #include "pair.h"
 #include "render.h"
 #include "screen.h"
+#include "pgn.h"
 
 bool running = true;
 
@@ -29,5 +30,6 @@ int main(int argc, char*  args[])
 	}
 	
 	screen->close();
+
 	return 0;
 }
