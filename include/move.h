@@ -1,8 +1,12 @@
 #include "piece.h"
+#include "pair.h"
+
 class Move
 {
 	private:
 		MoveType moveType;
+		Pair squareSrc;
+		Pair squareEnd;
 
 	public:
 		enum MoveType{
