@@ -5,6 +5,7 @@
 #include <string>
 #include <map>
 #include <vector>
+#include "move.h"
 
 class PGNParser
 {
@@ -13,6 +14,6 @@ class PGNParser
 	
 	
 	public:
-		PGN* parse(std::string& const contents) const;
+		PGN* parse(std::string& contents) const;
 };
 #endif

@@ -1,20 +1,22 @@
 #include "piece.h"
 #include "pair.h"
+#include "movetype.h"
+#include "checktype.h"
+#include <string>
 
 class Move
 {
-	private:
-		MoveType moveType;
-		Pair squareSrc;
-		Pair squareEnd;
+	std::string comments;
+
+	Pair pieceInitPos;
+	Pair pieceFinalPos;
+	MoveType moveType;
+	CheckType checkType;
+	uint8_t nag;	
 
 	public:
-		enum MoveType{
-			MOVE,
-			CAPTURE,
-			K_CASTLE,
-			Q_CASTLE
-		};
-
 		MoveType getMoveType();
+	
+	private:
+	
 };
