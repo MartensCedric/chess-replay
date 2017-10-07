@@ -11,8 +11,7 @@ class PGNParser
 {
 	std::map<std::string, std::string> metadata;
 	std::vector<Move> moves;
-	
-	
+		
 	public:
 		PGN* parse(std::string& contents) const;
 };

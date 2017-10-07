@@ -40,7 +40,6 @@ void Render::drawBoard(int x, int y, int w, int h)
 void Render::render(Texture* texture, int x, int y, SDL_Rect* clip)
 {
 	SDL_Rect renderQuad = { x, y, texture->width, texture->height };
-	
 	if(clip != NULL)
 	{
 		renderQuad.w = clip->w;

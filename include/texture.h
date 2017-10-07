@@ -4,8 +4,9 @@
 #include <SDL2/SDL.h>
 struct Texture
 {
+	Texture(const int width, const int height) : width(width), height(height){}
 	SDL_Texture* texture;
-	int width;
-	int height;
+	const int width;
+	const int height;
 };
 #endif

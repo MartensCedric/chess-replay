@@ -1,5 +1,6 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <iostream>
 #include <string>
 #include "pair.h"
 #include "render.h"
@@ -7,7 +8,7 @@
 #include "pgn.h"
 #include "textureLoader.h"
 
-const std::string PIECE_SHEET = "images/pieces/piece_sheet.png";
+const std::string SPR_KING_W = "images/pieces/king_w.png";
 
 int main(int argc, char*  args[])
 {
@@ -19,10 +20,9 @@ int main(int argc, char*  args[])
 
 	Render* render = new Render(screen->getWindow());
 	TextureLoader* textureLoader = new TextureLoader(render->getRenderer());
-	textureLoader->loadTexture(PIECE_SHEET);
+	textureLoader->loadTexture(SPR_KING_W);
 
 	SDL_Event e;
-
 	while(running)
 	{
 		while(SDL_PollEvent(&e) != 0)

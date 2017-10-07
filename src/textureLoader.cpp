@@ -12,7 +12,7 @@ TextureLoader::TextureLoader(SDL_Renderer* renderer)
 	}
 }
 
-void TextureLoader::loadTexture(std::string src)
+void TextureLoader::loadTexture(const std::string& src)
 {
 	SDL_Texture* newTexture = NULL;
 	SDL_Surface* loadedSurface = IMG_Load(src.c_str());
@@ -27,19 +27,12 @@ void TextureLoader::loadTexture(std::string src)
 		{
 			printf("Failed to load texture!\n");
 		}else{
-			Texture t;
+			Texture t(loadedSurface->w, loadedSurface->h);
 			t.texture = newTexture;
-			t.width = loadedSurface->w;
-			t.height = loadedSurface->h;
 			textureMap[src] = &t;
 		}
 			SDL_FreeSurface(loadedSurface);
 	}
-}
-
-Texture* TextureLoader::getTexture(const std::string& src)
-{
-	return textureMap[src];
 }
 
 TextureLoader::~TextureLoader()

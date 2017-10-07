@@ -8,14 +8,14 @@
 
 class TextureLoader
 {
-	std::map<std::string, Texture*> textureMap;
 	SDL_Renderer* renderer;
 
 	public:
+	std::map<std::string, Texture*> textureMap;
 	TextureLoader(SDL_Renderer* renderer);
 	~TextureLoader();
-	void loadTexture(std::string src);
-	Texture* getTexture(const std::string& src);
+	void loadTexture(const std::string& src);
+	Texture* getTexture(const std::string& src) { return textureMap[src]; }
 
 	private:
 };
