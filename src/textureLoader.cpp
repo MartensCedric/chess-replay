@@ -12,7 +12,7 @@ TextureLoader::TextureLoader(SDL_Renderer* renderer)
 	}
 }
 
-SDL_Texture* TextureLoader::loadTexture(std::string& src)
+void TextureLoader::loadTexture(std::string src)
 {
 	SDL_Texture* newTexture = NULL;
 	SDL_Surface* loadedSurface = IMG_Load(src.c_str());
@@ -23,14 +23,31 @@ SDL_Texture* TextureLoader::loadTexture(std::string& src)
 	}else{
 
 		newTexture = SDL_CreateTextureFromSurface(this->renderer, loadedSurface);
+		SDL_FreeSurface(loadedSurface);
 		if(newTexture == NULL)
 		{
 			printf("Failed to load texture!\n");
-		}
+		}else{
+			Texture t;
+			t.texture = newTexture;
+			t.width = 400;
+			t.height = 400;
+			textureMap[src] = &t;
+		}	
 	}
 }
 
-SDL_Texture* TextureLoader::getTexture(std::string& src)
+Texture* TextureLoader::getTexture(std::string src)
 {
 	return textureMap[src];
+}
+
+TextureLoader::~TextureLoader()
+{
+	for(std::map<std::string, Texture*>::iterator it = textureMap.begin(); it != textureMap.end(); it++)
+	{
+		SDL_DestroyTexture(it->second->texture);
+	}
+		
+	textureMap.clear();
 }

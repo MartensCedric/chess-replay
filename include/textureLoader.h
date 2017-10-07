@@ -4,15 +4,18 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include <map>
+#include "texture.h"
+
 class TextureLoader
 {
-	std::map<std::string, SDL_Texture*> textureMap;
+	std::map<std::string, Texture*> textureMap;
 	SDL_Renderer* renderer;
 
 	public:
 	TextureLoader(SDL_Renderer* renderer);
-	SDL_Texture* loadTexture(std::string& src);
-	SDL_Texture* getTexture(std::string& src);
+	~TextureLoader();
+	void loadTexture(std::string src);
+	Texture* getTexture(std::string src);
 
 	private:
 };

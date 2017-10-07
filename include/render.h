@@ -13,5 +13,6 @@ class Render
 	void clear(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	void clear();
 	void update();
+	SDL_Renderer* getRenderer() const { return renderer; }
 };
 #endif
