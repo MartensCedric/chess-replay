@@ -1,22 +1,26 @@
 #include <SDL2/SDL.h>
 #include <stdio.h>
+#include <string>
 #include "pair.h"
 #include "render.h"
 #include "screen.h"
 #include "pgn.h"
 #include "textureLoader.h"
 
-bool running = true;
+const std::string PIECE_SHEET = "images/pieces/piece_sheet.png";
 
 int main(int argc, char*  args[])
 {
+
+	bool running = true;
+
 	Screen* screen = new Screen(800, 600);
 	screen->createWindow();
 
 	Render* render = new Render(screen->getWindow());
 	TextureLoader* textureLoader = new TextureLoader(render->getRenderer());
-	textureLoader->loadTexture("images/pieces/piece_sheet.png");
-		
+	textureLoader->loadTexture(PIECE_SHEET);
+
 	SDL_Event e;
 
 	while(running)
@@ -38,5 +42,6 @@ int main(int argc, char*  args[])
 	delete textureLoader;
 	delete render;
 	delete screen;
+	
 	return 0;
 }

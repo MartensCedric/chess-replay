@@ -15,7 +15,7 @@ class TextureLoader
 	TextureLoader(SDL_Renderer* renderer);
 	~TextureLoader();
 	void loadTexture(std::string src);
-	Texture* getTexture(std::string src);
+	Texture* getTexture(const std::string& src);
 
 	private:
 };

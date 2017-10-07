@@ -21,23 +21,23 @@ void TextureLoader::loadTexture(std::string src)
 	{
 		printf("Unable to load image %s! %s", src.c_str(), IMG_GetError());
 	}else{
-
+		SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
 		newTexture = SDL_CreateTextureFromSurface(this->renderer, loadedSurface);
-		SDL_FreeSurface(loadedSurface);
 		if(newTexture == NULL)
 		{
 			printf("Failed to load texture!\n");
 		}else{
 			Texture t;
 			t.texture = newTexture;
-			t.width = 400;
-			t.height = 400;
+			t.width = loadedSurface->w;
+			t.height = loadedSurface->h;
 			textureMap[src] = &t;
-		}	
+		}
+			SDL_FreeSurface(loadedSurface);
 	}
 }
 
-Texture* TextureLoader::getTexture(std::string src)
+Texture* TextureLoader::getTexture(const std::string& src)
 {
 	return textureMap[src];
 }
