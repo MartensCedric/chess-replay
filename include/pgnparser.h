@@ -1,5 +1,5 @@
-#ifndef PARSER_H
-#define PARSER_H
+#ifndef PGN_PARSER_H
+#define PGN_PARSER_H
 
 #include "pgn.h"
 #include <string>
@@ -13,6 +13,8 @@ class PGNParser
 	std::vector<Move> moves;
 		
 	public:
-		PGN* parse(std::string& contents) const;
+		PGN* parse(std::string& contents);
+	private:
+		void extractTagInfo(std::string& rawtag);
 };
 #endif
