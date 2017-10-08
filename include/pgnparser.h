@@ -7,13 +7,14 @@
 #include <vector>
 #include "move.h"
 
-class PGNParser
+class PgnParser
 {
 	std::map<std::string, std::string> metadata;
-	std::vector<Move> moves;
+	std::vector<Move>* moves;
 		
 	public:
-		PGN* parse(std::string& contents);
+		~PgnParser();
+		Pgn* parse(std::string& contents);
 	private:
 		void extractTagInfo(std::string& rawtag);
 };

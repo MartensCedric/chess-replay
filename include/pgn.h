@@ -3,12 +3,13 @@
 
 #include <string.h>
 #include <map>
-class PGN
+class Pgn
 {
 	std::map<std::string, std::string> metadata;
 
 public:
 	std::map<std::string, std::string>& getMetadata() { return metadata; }
-	bool hasSTR();
+	void setMetadata(std::map<std::string, std::string>& metadata) { this->metadata = metadata;};
+	bool hasStr();
 };
 #endif

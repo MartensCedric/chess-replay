@@ -1,8 +1,9 @@
 #include "pgnparser.h"
 #include "pgn.h"
 #include <iostream>
+#include <stdexcept>
 
-PGN* PGNParser::parse(std::string& contents)
+Pgn* PgnParser::parse(std::string& contents)
 {
 	for(std::string::iterator it = contents.begin(); it != contents.end(); it++)
 	{
@@ -18,19 +19,38 @@ PGN* PGNParser::parse(std::string& contents)
 		}
 	}
 	
-	for(std::map<std::string, std::string>::iterator it = metadata.begin(); it != metadata.end(); it++)
-	{
-		std::cout << (*it).first << " -> " << (*it).second << std::endl;	
-	}
+	Pgn* pgn = new Pgn();
+	pgn->setMetadata(metadata);
 }
 
-void PGNParser::extractTagInfo(std::string& rawTag)
+void PgnParser::extractTagInfo(std::string& rawTag)
 {
-	int spacePos = rawTag.find(" ");
+	std::size_t spacePos = rawTag.find(" ");
+	if(spacePos == std::string::npos)
+	{
+		throw std::runtime_error("There is no space delimiter between the key and value of the raw tag : " + rawTag);	
+	}
 	std::string key = rawTag.substr(0, spacePos);
 	rawTag.erase(0, spacePos + 1);
 
-	//TODO make sure there is 2 double quotes	
+	int quoteOcc = 0;
+	for(int i = 0; i < rawTag.length(); i++)
+	{
+		if(rawTag[i] == '"')
+		{
+			quoteOcc++;
+		}
+	}
+
+	if(quoteOcc != 2)
+	{
+		throw std::runtime_error("There is not exactly two quotes in the value tag : " + rawTag);		
+	}
 	std::string value = rawTag.substr(1, rawTag.length() - 2);
 	this->metadata[key] = value;
+}
+
+PgnParser::~PgnParser()
+{
+	delete moves;
 }

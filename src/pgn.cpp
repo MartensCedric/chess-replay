@@ -3,7 +3,7 @@
 /**
 	Returns true if the PGN object has information on the Seven Tag Roaster (STR), returns false otherwise.
 */
-bool PGN::hasSTR()
+bool Pgn::hasStr()
 {
 	std::string tags[] = {"Event", "Site", "Date", "Round", "White", "Black", "Result"};
 	
