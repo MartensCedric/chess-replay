@@ -5,6 +5,7 @@
 
 Pgn* PgnParser::parse(std::string& contents)
 {
+	int plyIndex = 0;
 	for(std::string::iterator it = contents.begin(); it != contents.end(); it++)
 	{
 		if(*it == '[')
@@ -17,12 +18,37 @@ Pgn* PgnParser::parse(std::string& contents)
 			}
 			extractTagInfo(bracketData);
 		}
-	}
-	
-	Pgn* pgn = new Pgn();
-	pgn->setMetadata(metadata);
-}
 
+		if(*it == '1' && *(it + 1) == '.')
+		{
+			while(it != contents.end())
+			{
+				plyIndex++;
+				it+=2;
+				std::string::iterator plyBegin = it;
+				while(it != contents.end() && *it != '.')
+				{
+					it++;
+				}
+
+				while(*it != ' ')
+				{
+					if(it == plyBegin)
+					{
+						throw std::runtime_error("Could not find boundaries for ply : " + plyIndex);
+					}
+					it--;
+				}
+				std::string::iterator plyEnd = --it;
+				std::string rawPly(plyBegin, plyEnd);
+				extractPlyInfo(rawPly, plyIndex);
+			}
+		}
+	}
+		Pgn* pgn = new Pgn();
+		pgn->setMetadata(metadata);
+		return pgn;
+}
 void PgnParser::extractTagInfo(std::string& rawTag)
 {
 	std::size_t spacePos = rawTag.find(" ");
@@ -48,6 +74,12 @@ void PgnParser::extractTagInfo(std::string& rawTag)
 	}
 	std::string value = rawTag.substr(1, rawTag.length() - 2);
 	this->metadata[key] = value;
+}
+
+void PgnParser::extractPlyInfo(std::string& rawPly, int plyIndex)
+{
+	//TODO
+	std::cout << rawPly << " " << plyIndex << std::endl;
 }
 
 PgnParser::~PgnParser()

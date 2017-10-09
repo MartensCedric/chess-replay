@@ -17,5 +17,6 @@ class PgnParser
 		Pgn* parse(std::string& contents);
 	private:
 		void extractTagInfo(std::string& rawtag);
+		void extractPlyInfo(std::string& rawPly, int plyIndex);
 };
 #endif

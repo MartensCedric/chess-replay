@@ -1,5 +1,6 @@
 #define BOOST_TEST_DYN_LINK
 #define BOOST_TEST_MODULE Chess
+
 #include <boost/test/unit_test.hpp>
 #include "pgnparser.h"
 #include "pgn.h"
@@ -47,4 +48,13 @@ BOOST_AUTO_TEST_CASE(tagsNoQuoteKO)
 	PgnParser* parser = new PgnParser();
 	std::string contents = fileToString("test/testmatches/tags_no_quotes.pgn");
 	BOOST_CHECK_THROW(parser->parse(contents), std::runtime_error);
+}
+
+BOOST_AUTO_TEST_CASE(plyOK)
+{
+	PgnParser* parser = new PgnParser();
+	std::string contents = fileToString("test/testmatches/ply_only.pgn");
+	parser->parse(contents);
+	//TODO
+	BOOST_CHECK_EQUAL(1,1);
 }

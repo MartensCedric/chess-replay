@@ -1,5 +1,5 @@
 # What is Chess Replay?
-Chess Replay is a PGN file reader using SDL2. It allows chess players to replay matches in order to improve by studying. Chess Replay is currently in very early development and should not be used. 
+Chess Replay is a PGN file reader using SDL2. It allows chess players to replay matches in order to improve by studying. Chess Replay is currently **in very early development and should not be used**. 
 
 
 # What is a PGN file?
