@@ -21,33 +21,36 @@ Pgn* PgnParser::parse(std::string& contents)
 
 		if(*it == '1' && *(it + 1) == '.')
 		{
+			it++;
 			while(it != contents.end())
 			{
 				plyIndex++;
-				it+=2;
+				it++;
 				std::string::iterator plyBegin = it;
+
 				while(it != contents.end() && *it != '.')
 				{
 					it++;
 				}
 
-				while(*it != ' ')
-				{
-					if(it == plyBegin)
-					{
-						throw std::runtime_error("Could not find boundaries for ply : " + plyIndex);
-					}
-					it--;
-				}
-				std::string::iterator plyEnd = --it;
+				std::string::iterator plyEnd = it;
 				std::string rawPly(plyBegin, plyEnd);
+				if(it != contents.end())
+				{
+					std::size_t spacePos = rawPly.find_last_of(" ");
+					if(spacePos == std::string::npos)
+					{
+						throw std::runtime_error("Could not parse ply : " + rawPly);
+					}
+					rawPly = rawPly.substr(0, spacePos);
+				}
 				extractPlyInfo(rawPly, plyIndex);
 			}
 		}
 	}
-		Pgn* pgn = new Pgn();
-		pgn->setMetadata(metadata);
-		return pgn;
+	Pgn* pgn = new Pgn();
+	pgn->setMetadata(metadata);
+	return pgn;
 }
 void PgnParser::extractTagInfo(std::string& rawTag)
 {
@@ -78,8 +81,7 @@ void PgnParser::extractTagInfo(std::string& rawTag)
 
 void PgnParser::extractPlyInfo(std::string& rawPly, int plyIndex)
 {
-	//TODO
-	std::cout << rawPly << " " << plyIndex << std::endl;
+	std::cout << plyIndex << "->" << rawPly << std::endl;
 }
 
 PgnParser::~PgnParser()
