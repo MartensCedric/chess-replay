@@ -9,6 +9,7 @@
 #include <iostream>
 #include <streambuf>
 #include <stdexcept>
+#include "move.h"
 
 std::string fileToString(std::string filePath)
 {
@@ -50,11 +51,29 @@ BOOST_AUTO_TEST_CASE(tagsNoQuoteKO)
 	BOOST_CHECK_THROW(parser->parse(contents), std::runtime_error);
 }
 
-BOOST_AUTO_TEST_CASE(plyOK)
+BOOST_AUTO_TEST_CASE(moveOK)
 {
-	PgnParser* parser = new PgnParser();
-	std::string contents = fileToString("test/testmatches/ply_only.pgn");
-	parser->parse(contents);
-	//TODO
-	BOOST_CHECK_EQUAL(1,1);
+	Move* mvQcm = PgnParser::parseMove("0-0-0#");
+	BOOST_CHECK_EQUAL(MoveType::Q_CASTLE, mvQcm->getMoveType());
+	BOOST_CHECK_EQUAL(CheckType::CHECKMATE, mvQcm->getCheckType());
+	delete mvQcm;
+
+	Move* mvKc = PgnParser::parseMove("0-0+");
+	BOOST_CHECK_EQUAL(MoveType::K_CASTLE, mvKc->getMoveType());
+	BOOST_CHECK_EQUAL(CheckType::CHECK, mvKc->getCheckType());
+	delete mvKc;
+
+	Move* mvNormal = PgnParser::parseMove("e4");
+	BOOST_CHECK_EQUAL(MoveType::MOVE, mvNormal->getMoveType());
+	BOOST_CHECK_EQUAL(CheckType::NONE, mvNormal->getCheckType());	
+	delete mvNormal;
 }
+
+//BOOST_AUTO_TEST_CASE(plyOK)
+//{
+//	PgnParser* parser = new PgnParser();
+//	std::string contents = fileToString("test/testmatches/ply_only.pgn");
+//	parser->parse(contents);
+	//TODO
+//	BOOST_CHECK_EQUAL(1,1);
+//}

@@ -6,17 +6,19 @@
 #include <map>
 #include <vector>
 #include "move.h"
+#include "ply.h"
 
 class PgnParser
 {
 	std::map<std::string, std::string> metadata;
-	std::vector<Move>* moves;
+	std::vector<Move*> moves;
 		
 	public:
 		~PgnParser();
 		Pgn* parse(std::string& contents);
+		static Ply* parsePly(std::string& rawPly, int plyIndex);
+		static Move* parseMove(const std::string& rawMove);
 	private:
-		void extractTagInfo(std::string& rawtag);
-		void extractPlyInfo(std::string& rawPly, int plyIndex);
+		void parseTag(std::string& rawtag);
 };
 #endif

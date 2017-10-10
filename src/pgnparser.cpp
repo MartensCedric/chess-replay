@@ -16,7 +16,7 @@ Pgn* PgnParser::parse(std::string& contents)
 				it++;
 				bracketData.append(1, *it);
 			}
-			extractTagInfo(bracketData);
+			parseTag(bracketData);
 		}
 
 		if(*it == '1' && *(it + 1) == '.')
@@ -44,7 +44,7 @@ Pgn* PgnParser::parse(std::string& contents)
 					}
 					rawPly = rawPly.substr(0, spacePos);
 				}
-				extractPlyInfo(rawPly, plyIndex);
+				parsePly(rawPly, plyIndex);
 			}
 		}
 	}
@@ -52,7 +52,7 @@ Pgn* PgnParser::parse(std::string& contents)
 	pgn->setMetadata(metadata);
 	return pgn;
 }
-void PgnParser::extractTagInfo(std::string& rawTag)
+void PgnParser::parseTag(std::string& rawTag)
 {
 	std::size_t spacePos = rawTag.find(" ");
 	if(spacePos == std::string::npos)
@@ -79,12 +79,42 @@ void PgnParser::extractTagInfo(std::string& rawTag)
 	this->metadata[key] = value;
 }
 
-void PgnParser::extractPlyInfo(std::string& rawPly, int plyIndex)
+Ply* PgnParser::parsePly(std::string& rawPly, int plyIndex)
 {
 	std::cout << plyIndex << "->" << rawPly << std::endl;
+	std::size_t spacePos = rawPly.find(" ");
+
+}
+
+Move* PgnParser::parseMove(const std::string& rawMove)
+{
+	Move* move = new Move();
+	if(rawMove.substr(0, 5) == "0-0-0")
+	{
+		move->setMoveType(MoveType::Q_CASTLE);
+	}else if(rawMove.substr(0, 3) == "0-0")
+	{
+		move->setMoveType(MoveType::K_CASTLE);
+	}else if(rawMove.find("x") != std::string::npos)
+	{
+		move->setMoveType(MoveType::CAPTURE);
+	}else{
+		move->setMoveType(MoveType::MOVE);
+	}
+	
+	char lastChar = rawMove[rawMove.length() - 1];
+	if(lastChar == '+')
+	{
+		move->setCheckType(CheckType::CHECK);
+	}else if(lastChar == '#'){
+		move->setCheckType(CheckType::CHECKMATE);
+	}else{
+		move->setCheckType(CheckType::NONE);
+	}
+	return move;
 }
 
 PgnParser::~PgnParser()
 {
-	delete moves;
+	moves.clear();
 }
