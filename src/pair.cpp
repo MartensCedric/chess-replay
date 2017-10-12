@@ -1,6 +1,6 @@
 #include "pair.h"
 #include <string>
-#include <exception>
+#include <stdexcept>
 
 Pair::Pair(int rank, int file) 
 	: rank(rank), file(file) 
@@ -40,10 +40,10 @@ void Pair::ensureValid() const
 }
 
 int Pair::getRankFromNotation(const std::string& notation)
-{
+{	
 	if(notation.length() != 2)
 	{
-		//throw invalid_argument("invalid notation");
+		throw std::invalid_argument("Invalid notation : " + notation);
 	}
 
 	return notation[1] - '1';

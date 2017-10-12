@@ -3,5 +3,9 @@
 
 Move::Move()
 {
-	
+
+}
+
+Move::~Move()
+{
 }

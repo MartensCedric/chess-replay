@@ -65,7 +65,9 @@ BOOST_AUTO_TEST_CASE(moveOK)
 
 	Move* mvNormal = PgnParser::parseMove("e4");
 	BOOST_CHECK_EQUAL(MoveType::MOVE, mvNormal->getMoveType());
-	BOOST_CHECK_EQUAL(CheckType::NONE, mvNormal->getCheckType());	
+	BOOST_CHECK_EQUAL(CheckType::NONE, mvNormal->getCheckType());
+	BOOST_CHECK_EQUAL(4, mvNormal->getFinalPosition()->getFile());
+	BOOST_CHECK_EQUAL(3, mvNormal->getFinalPosition()->getRank());
 	delete mvNormal;
 }
 

@@ -2,6 +2,7 @@
 #include "pgn.h"
 #include <iostream>
 #include <stdexcept>
+#include <cctype>
 
 Pgn* PgnParser::parse(std::string& contents)
 {
@@ -101,7 +102,7 @@ Move* PgnParser::parseMove(const std::string& rawMove)
 	}else{
 		move->setMoveType(MoveType::MOVE);
 	}
-	
+
 	char lastChar = rawMove[rawMove.length() - 1];
 	if(lastChar == '+')
 	{
@@ -110,6 +111,26 @@ Move* PgnParser::parseMove(const std::string& rawMove)
 		move->setCheckType(CheckType::CHECKMATE);
 	}else{
 		move->setCheckType(CheckType::NONE);
+	}
+
+	if(move->getMoveType() == MoveType::MOVE || move->getMoveType() == MoveType::CAPTURE)
+	{
+		bool fileDigitFound = false;
+		std::string* notation = nullptr;
+		for(std::string::const_iterator it = rawMove.end(); it != rawMove.begin() && !fileDigitFound; it--)
+		{
+			if(isdigit(*it))
+			{
+				fileDigitFound = true;
+				notation = new std::string(it - 1, it + 1);
+			}
+		}
+
+		if(!fileDigitFound)
+		{
+			throw std::runtime_error("Could not find file digit in :" + rawMove);
+		}
+		move->setFinalPosition(new Pair(*notation));
 	}
 	return move;
 }
