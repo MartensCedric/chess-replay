@@ -27,6 +27,7 @@ int Pair::getFile() const
 
 std::string Pair::getNotation()
 {
+	//TODO
 	return "";
 }
 
@@ -35,7 +36,7 @@ void Pair::ensureValid() const
 	if(rank < 0 || rank >= 8 ||
 		file < 0 || file >= 8)
 	{
-				
+		throw std::runtime_error("Rank or file not within bounds");
 	}
 }
 

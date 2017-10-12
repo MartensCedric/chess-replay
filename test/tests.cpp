@@ -3,6 +3,7 @@
 
 #include <boost/test/unit_test.hpp>
 #include "pgnparser.h"
+#include "pair.h"
 #include "pgn.h"
 #include <string>
 #include <fstream>
@@ -69,6 +70,25 @@ BOOST_AUTO_TEST_CASE(moveOK)
 	BOOST_CHECK_EQUAL(4, mvNormal->getFinalPosition()->getFile());
 	BOOST_CHECK_EQUAL(3, mvNormal->getFinalPosition()->getRank());
 	delete mvNormal;
+}
+
+BOOST_AUTO_TEST_CASE(notationOK)
+{
+	Pair pe4("e4");
+	BOOST_CHECK_EQUAL(3, pe4.getRank());
+	BOOST_CHECK_EQUAL(4, pe4.getFile());
+	
+	Pair pg3("g3");
+	BOOST_CHECK_EQUAL(2, pg3.getRank());
+	BOOST_CHECK_EQUAL(6, pg3.getFile());
+}
+
+BOOST_AUTO_TEST_CASE(notationKO)
+{
+	BOOST_CHECK_THROW(new Pair("43"), std::runtime_error);
+	BOOST_CHECK_THROW(new Pair("e4+"), std::invalid_argument);
+	BOOST_CHECK_THROW(new Pair("i3"), std::runtime_error);
+	BOOST_CHECK_THROW(new Pair("E4"), std::runtime_error); 	
 }
 
 //BOOST_AUTO_TEST_CASE(plyOK)
