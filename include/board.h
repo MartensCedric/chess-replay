@@ -13,6 +13,7 @@ class Board
 	void move(Piece* piece, int rankDest, int fileDest);
 	void capture(Piece* attacker, Piece* defender);
 	void castle(bool white, bool kingside);
+	void reset();
 	private:
 	void ensureBoundaries(int rank, int file);
 };
