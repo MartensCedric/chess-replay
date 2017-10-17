@@ -5,6 +5,8 @@
 #include "pgnparser.h"
 #include "pair.h"
 #include "pgn.h"
+#include "board.h"
+#include "piecetype.h"
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -89,6 +91,12 @@ BOOST_AUTO_TEST_CASE(notationKO)
 	BOOST_CHECK_THROW(new Pair("e4+"), std::invalid_argument);
 	BOOST_CHECK_THROW(new Pair("i3"), std::runtime_error);
 	BOOST_CHECK_THROW(new Pair("E4"), std::runtime_error); 	
+}
+
+BOOST_AUTO_TEST_CASE(castlingKO)
+{
+	Board b;
+	BOOST_CHECK_THROW(b.castle(true, true), std::runtime_error);
 }
 
 //BOOST_AUTO_TEST_CASE(plyOK)

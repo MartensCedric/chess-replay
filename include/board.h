@@ -11,6 +11,7 @@ class Board
 	~Board();
 	Piece* getPieceAt(int rank, int file);
 	void move(Piece* piece, int rankDest, int fileDest);
+	void move(int rankSrc, fileSrc, int rankDest, int fileDest);
 	void capture(Piece* attacker, Piece* defender);
 	void castle(bool white, bool kingside);
 	void reset();

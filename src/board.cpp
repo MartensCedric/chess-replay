@@ -1,5 +1,7 @@
 #include "board.h"
+#include "piece.h"
 #include <stdexcept>
+#include <iostream>
 Board::Board()
 {
 	reset();
@@ -11,16 +13,23 @@ Piece* Board::getPieceAt(int rank, int file)
 	return boardData[rank][file];
 }
 
-void Board::move(Piece* piece, int rank, int file)
+void Board::move(Piece* piece, int rankDest, int fileDest)
 {
 	ensureBoundaries(rank, file);
-	if(boardData[rank][file] != nullptr)
+
+	Piece* p = boardData[rank][file];
+	if(p != nullptr)
 	{
 		throw std::runtime_error("You can't move a piece to an occupied square!");
 	}
-
+	p = piece;
+	piece = nullptr;
 }
 
+void Board::move(int rankSrc, int fileSrc, int rankDest, int fileDest)
+{
+	move(getPieceAt(rankSrc, fileSrc), rankDest, fileDest);
+}
 void Board::ensureBoundaries(int rank, int file)
 {
 	if(rank >= 8 || rank < 0 
@@ -55,6 +64,7 @@ void Board::reset()
 			isWhite = false;
 			rankPos = 7;
 		}
+		
 		boardData[rankPos][0] = new Piece(isWhite, PieceType::ROOK);
 		boardData[rankPos][7] = new Piece(isWhite, PieceType::ROOK);
 		boardData[rankPos][1] = new Piece(isWhite, PieceType::KNIGHT);
@@ -66,7 +76,29 @@ void Board::reset()
 	}
 }
 
+void Board::castle(bool white, bool kingside)
+{
+	int rank = white ? 0 : 7;
+	
+	int currFileRook = kingside ? 7 : 0;
+
+	int newFileKing = kingside ? 6 : 2;
+	int newFileRook = kingside ? 5 : 3;
+	
+	Piece* rook = getPieceAt(rank, currFileRook);
+	Piece* king = getPieceAt(rank, 4);
+	
+	move(king, rank, newFileKing);
+	move(rook, rank, newFileRook);	
+}
+
 Board::~Board()
 {
-	delete [] boardData;
+	for(int i = 0; i < 8; i++)
+	{
+		for(int j = 0; j < 8; j++)
+		{
+			delete boardData[i][j];
+		}
+	}
 }
