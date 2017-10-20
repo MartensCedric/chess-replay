@@ -27,8 +27,10 @@ int Pair::getFile() const
 
 std::string Pair::getNotation()
 {
-	//TODO
-	return "";
+	char rank = getRank() + '1';
+	char file = getFile() + 'a';
+	std::string notation {file, rank};
+	return notation;
 }
 
 void Pair::ensureValid() const

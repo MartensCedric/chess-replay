@@ -79,10 +79,12 @@ BOOST_AUTO_TEST_CASE(notationOK)
 	Pair pe4("e4");
 	BOOST_CHECK_EQUAL(3, pe4.getRank());
 	BOOST_CHECK_EQUAL(4, pe4.getFile());
+	BOOST_CHECK_EQUAL("e4", pe4.getNotation());
 	
 	Pair pg3("g3");
 	BOOST_CHECK_EQUAL(2, pg3.getRank());
 	BOOST_CHECK_EQUAL(6, pg3.getFile());
+	BOOST_CHECK_EQUAL("g3", pg3.getNotation());
 }
 
 BOOST_AUTO_TEST_CASE(notationKO)

@@ -15,9 +15,9 @@ Piece* Board::getPieceAt(int rank, int file)
 
 void Board::move(Piece* piece, int rankDest, int fileDest)
 {
-	ensureBoundaries(rank, file);
+	ensureBoundaries(rankDest, fileDest);
 
-	Piece* p = boardData[rank][file];
+	Piece* p = boardData[rankDest][fileDest];
 	if(p != nullptr)
 	{
 		throw std::runtime_error("You can't move a piece to an occupied square!");
