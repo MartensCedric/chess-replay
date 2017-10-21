@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(tagsNoQuoteKO)
 	BOOST_CHECK_THROW(parser->parse(contents), std::runtime_error);
 }
 
-BOOST_AUTO_TEST_CASE(moveOK)
+BOOST_AUTO_TEST_CASE(parseMoveOK)
 {
 	Move* mvQcm = PgnParser::parseMove("0-0-0#");
 	BOOST_CHECK_EQUAL(MoveType::Q_CASTLE, mvQcm->getMoveType());
@@ -72,6 +72,17 @@ BOOST_AUTO_TEST_CASE(moveOK)
 	BOOST_CHECK_EQUAL(4, mvNormal->getFinalPosition()->getFile());
 	BOOST_CHECK_EQUAL(3, mvNormal->getFinalPosition()->getRank());
 	delete mvNormal;
+
+	Move mvNormalCtor("f7");
+
+	BOOST_CHECK_EQUAL(MoveType::MOVE, mvNormalCtor.getMoveType());
+	BOOST_CHECK_EQUAL(CheckType::NONE, mvNormalCtor.getCheckType());
+	BOOST_CHECK_EQUAL(5, mvNormalCtor.getFinalPosition()->getFile());
+	BOOST_CHECK_EQUAL(6, mvNormalCtor.getFinalPosition()->getRank());
+}
+
+BOOST_AUTO_TEST_CASE(plyOK)
+{
 }
 
 BOOST_AUTO_TEST_CASE(notationOK)

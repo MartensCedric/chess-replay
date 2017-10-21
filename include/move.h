@@ -16,6 +16,7 @@ class Move
 	Pair* finalPos = nullptr;
 	public:
 		Move();
+		Move(const std::string& notation);
 		~Move();
 		void setMoveType(MoveType moveType){ this->moveType = moveType; }
 		MoveType getMoveType(){ return moveType; }

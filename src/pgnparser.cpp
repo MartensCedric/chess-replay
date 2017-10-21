@@ -84,7 +84,10 @@ Ply* PgnParser::parsePly(std::string& rawPly, int plyIndex)
 {
 	std::cout << plyIndex << "->" << rawPly << std::endl;
 	std::size_t spacePos = rawPly.find(" ");
-
+	Ply* ply = new Ply();
+	ply->whiteMove = new Move(rawPly.substr(0, spacePos));
+	ply->blackMove = new Move(rawPly.substr(spacePos + 1, rawPly.length() - 1));
+	return ply;
 }
 
 Move* PgnParser::parseMove(const std::string& rawMove)

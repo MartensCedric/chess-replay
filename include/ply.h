@@ -2,8 +2,7 @@
 #define PLY_H
 
 #include "move.h"
-
-class Ply
+struct Ply
 {
 	Move* whiteMove;
 	Move* blackMove;	
