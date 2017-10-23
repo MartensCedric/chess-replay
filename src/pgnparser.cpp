@@ -45,7 +45,7 @@ Pgn* PgnParser::parse(std::string& contents)
 					}
 					rawPly = rawPly.substr(0, spacePos);
 				}
-				parsePly(rawPly, plyIndex);
+				parsePly(rawPly);
 			}
 		}
 	}
@@ -80,10 +80,14 @@ void PgnParser::parseTag(std::string& rawTag)
 	this->metadata[key] = value;
 }
 
-Ply* PgnParser::parsePly(std::string& rawPly, int plyIndex)
+Ply* PgnParser::parsePly(const std::string& rawPly)
 {
-	std::cout << plyIndex << "->" << rawPly << std::endl;
 	std::size_t spacePos = rawPly.find(" ");
+
+	if(spacePos == std::string::npos)
+	{
+		throw std::runtime_error("No space seperating moves in this ply : " + rawPly);
+	}
 	Ply* ply = new Ply();
 	ply->whiteMove = new Move(rawPly.substr(0, spacePos));
 	ply->blackMove = new Move(rawPly.substr(spacePos + 1, rawPly.length() - 1));

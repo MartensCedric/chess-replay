@@ -19,13 +19,16 @@ class Move
 		Move(const std::string& notation);
 		~Move();
 		void setMoveType(MoveType moveType){ this->moveType = moveType; }
-		MoveType getMoveType(){ return moveType; }
+		MoveType getMoveType() const { return moveType; }
 
 		void setCheckType(CheckType checkType){ this->checkType = checkType; }
-		CheckType getCheckType(){ return checkType; }
+		CheckType getCheckType() const { return checkType; }
 		
 		void setFinalPosition(Pair* finalPos) { this->finalPos = finalPos; }
-		Pair* getFinalPosition(){ return finalPos; }	
+		Pair* getFinalPosition() const { return finalPos; }	
+	
+		bool operator==(const Move& m);
+		bool operator!=(const Move&m);
 	private:
 	
 };

@@ -20,19 +20,24 @@ Move::~Move()
 {
 }
 
-bool operator==(Move m1, Move m2)
+bool Move::operator==(const Move& m)
 {
-	if(&m1 == &m2)
+	if(this == &m)
 		return true;
 
-	if(m1.getCheckType() != m2.getCheckType())
+	if(getCheckType() != m.getCheckType())
 		return false;
 
-	if(m1.getMoveType() != m2.getMoveType())
+	if(getMoveType() != m.getMoveType())
 		return false;
 
-	if(m1.getFinalPosition() != m2.getFinalPosition())
+	if(getFinalPosition() != m.getFinalPosition())
 		return false;
 
 	return true;
+}
+
+bool Move::operator!=(const Move& m)
+{
+	return !(*this == m);
 }

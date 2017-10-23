@@ -81,10 +81,6 @@ BOOST_AUTO_TEST_CASE(parseMoveOK)
 	BOOST_CHECK_EQUAL(6, mvNormalCtor.getFinalPosition()->getRank());
 }
 
-BOOST_AUTO_TEST_CASE(plyOK)
-{
-}
-
 BOOST_AUTO_TEST_CASE(notationOK)
 {
 	Pair pe4("e4");
@@ -112,11 +108,29 @@ BOOST_AUTO_TEST_CASE(castlingKO)
 	BOOST_CHECK_THROW(b.castle(true, true), std::runtime_error);
 }
 
-//BOOST_AUTO_TEST_CASE(plyOK)
-//{
-//	PgnParser* parser = new PgnParser();
-//	std::string contents = fileToString("test/testmatches/ply_only.pgn");
-//	parser->parse(contents);
-	//TODO
-//	BOOST_CHECK_EQUAL(1,1);
-//}
+BOOST_AUTO_TEST_CASE(plyOK)
+{
+	Move* m1 = new Move("e4");
+	Move* m2 = new Move("e5");
+
+	Ply* ply = PgnParser::parsePly("e4 e5");
+	BOOST_ASSERT(*m1 == *(ply->whiteMove));
+	BOOST_ASSERT(*m2 == *(ply->blackMove));
+
+	m1 = new Move("0-0-0+");
+	m2 = new Move("0-0#");
+
+	ply = PgnParser::parsePly("0-0-0+ 0-0#");
+	BOOST_ASSERT(*m1 == *(ply->whiteMove));
+	BOOST_ASSERT(*m2 == *(ply->blackMove));
+
+	delete ply;
+	delete m1;
+	delete m2;
+}
+
+BOOST_AUTO_TEST_CASE(plyKO)
+{
+	BOOST_CHECK_THROW(PgnParser::parsePly("e4  e5"), std::runtime_error); //two spaces
+	BOOST_CHECK_THROW(PgnParser::parsePly("e4e5"), std::runtime_error);
+}
