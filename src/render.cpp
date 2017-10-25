@@ -37,9 +37,9 @@ void Render::drawBoard(int x, int y, int w, int h)
 	}	
 }
 
-void Render::render(Texture* texture, int x, int y, SDL_Rect* clip)
+void Render::render(Texture* texture, int x, int y, int w, int h, SDL_Rect* clip)
 {
-	SDL_Rect renderQuad = { x, y, texture->width, texture->height };
+	SDL_Rect renderQuad = { x, y, w, h };
 	if(clip != NULL)
 	{
 		renderQuad.w = clip->w;
@@ -51,7 +51,12 @@ void Render::render(Texture* texture, int x, int y, SDL_Rect* clip)
 
 void Render::render(Texture* texture, int x, int y)
 {
-	render(texture, x, y, NULL);
+	render(texture, x, y, texture->width, texture->height, NULL);
+}
+
+void Render::render(Texture* texture, int x, int y, int w, int h)
+{
+	render(texture, x, y, w, h, NULL);
 }
 
 void Render::clear()

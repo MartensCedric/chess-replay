@@ -5,6 +5,7 @@
 #include <SDL2/SDL.h>
 #include <map>
 #include "texture.h"
+#include <iostream>
 
 class TextureLoader
 {
@@ -15,7 +16,13 @@ class TextureLoader
 	TextureLoader(SDL_Renderer* renderer);
 	~TextureLoader();
 	void loadTexture(const std::string& src);
-	Texture* getTexture(const std::string& src) { return textureMap[src]; }
+	Texture* getTexture(const std::string& src) { 
+
+	for(std::map<std::string, Texture*>::iterator it = textureMap.begin(); it != textureMap.end(); it++)
+	{
+	 	std::cout << "Key " << it->first << " - Value : " << it->second->width << " " << it->second->height << "\n" << std::endl;
+	}
+return textureMap[src]; }
 
 	private:
 };

@@ -4,6 +4,7 @@
 #include <stdexcept>
 #include <cctype>
 
+//TODO add const iteration
 Pgn* PgnParser::parse(std::string& contents)
 {
 	int plyIndex = 0;
