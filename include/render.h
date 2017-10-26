@@ -3,17 +3,18 @@
 
 #include <SDL2/SDL.h>
 #include "texture.h"
-
+#include "board.h"
 class Render
 {
 	SDL_Renderer* renderer = NULL;
 	
 	public:
 	Render(SDL_Window* window);
-	void drawBoard(int x, int y, int w, int h);
+	void renderTiles(int x, int y, int w, int h);
 	void render(Texture* texture, int x, int y);
 	void render(Texture* texture, int x, int y, int w, int h);
 	void render(Texture* texture, int x, int y, int w, int h, SDL_Rect* clip);
+	void renderPieces(Board* board);
 	void clear(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	void clear();
 	void update();

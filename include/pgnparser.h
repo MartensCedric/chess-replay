@@ -15,10 +15,10 @@ class PgnParser
 		
 	public:
 		~PgnParser();
-		Pgn* parse(std::string& contents);
+		Pgn* parse(const std::string& contents);
 		static Ply* parsePly(const std::string& rawPly);
 		static Move* parseMove(const std::string& rawMove);
 	private:
-		void parseTag(std::string& rawtag);
+		void parseTag(const std::string& rawtag);
 };
 #endif

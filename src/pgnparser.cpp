@@ -4,11 +4,10 @@
 #include <stdexcept>
 #include <cctype>
 
-//TODO add const iteration
-Pgn* PgnParser::parse(std::string& contents)
+Pgn* PgnParser::parse(const std::string& contents)
 {
 	int plyIndex = 0;
-	for(std::string::iterator it = contents.begin(); it != contents.end(); it++)
+	for(std::string::const_iterator it = contents.begin(); it != contents.end(); it++)
 	{
 		if(*it == '[')
 		{
@@ -28,15 +27,14 @@ Pgn* PgnParser::parse(std::string& contents)
 			{
 				plyIndex++;
 				it++;
-				std::string::iterator plyBegin = it;
+				std::string::const_iterator plyBegin = it;
 
 				while(it != contents.end() && *it != '.')
 				{
 					it++;
 				}
 
-				std::string::iterator plyEnd = it;
-				std::string rawPly(plyBegin, plyEnd);
+				std::string rawPly(plyBegin, it);
 				if(it != contents.end())
 				{
 					std::size_t spacePos = rawPly.find_last_of(" ");
@@ -54,7 +52,7 @@ Pgn* PgnParser::parse(std::string& contents)
 	pgn->setMetadata(metadata);
 	return pgn;
 }
-void PgnParser::parseTag(std::string& rawTag)
+void PgnParser::parseTag(const std::string& rawTag)
 {
 	std::size_t spacePos = rawTag.find(" ");
 	if(spacePos == std::string::npos)
@@ -62,12 +60,12 @@ void PgnParser::parseTag(std::string& rawTag)
 		throw std::runtime_error("There is no space delimiter between the key and value of the raw tag : " + rawTag);	
 	}
 	std::string key = rawTag.substr(0, spacePos);
-	rawTag.erase(0, spacePos + 1);
+	std::string val = rawTag.substr(spacePos + 1, rawTag.length() - 1);
 
 	int quoteOcc = 0;
-	for(int i = 0; i < rawTag.length(); i++)
+	for(int i = 0; i < val.length(); i++)
 	{
-		if(rawTag[i] == '"')
+		if(val[i] == '"')
 		{
 			quoteOcc++;
 		}
@@ -75,10 +73,9 @@ void PgnParser::parseTag(std::string& rawTag)
 
 	if(quoteOcc != 2)
 	{
-		throw std::runtime_error("There is not exactly two quotes in the value tag : " + rawTag);		
+		throw std::runtime_error("There is not exactly two quotes in the value tag : " + val);		
 	}
-	std::string value = rawTag.substr(1, rawTag.length() - 2);
-	this->metadata[key] = value;
+	this->metadata[key] = val.substr(1, val.length() - 2);
 }
 
 Ply* PgnParser::parsePly(const std::string& rawPly)

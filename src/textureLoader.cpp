@@ -14,7 +14,6 @@ TextureLoader::TextureLoader(SDL_Renderer* renderer)
 
 void TextureLoader::loadTexture(const std::string& src)
 {
-/*
 	SDL_Texture* newTexture = NULL;
 	SDL_Surface* loadedSurface = IMG_Load(src.c_str());
 
@@ -22,31 +21,19 @@ void TextureLoader::loadTexture(const std::string& src)
 	{
 		printf("Unable to load image %s! %s", src.c_str(), IMG_GetError());
 	}else{
-		//SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
+		SDL_SetColorKey(loadedSurface, SDL_TRUE, SDL_MapRGB(loadedSurface->format, 0, 0xFF, 0xFF));
 		newTexture = SDL_CreateTextureFromSurface(this->renderer, loadedSurface);
 		if(newTexture == NULL)
 		{
 			printf("Failed to load texture!\n");
 		}else{
-			Texture t(loadedSurface->w, loadedSurface->h);
-			t.texture = newTexture;
-			textureMap[src] = &t;
+			Texture* t = new Texture(loadedSurface->w, loadedSurface->h);
+			t->texture = newTexture;
+			textureMap[src] = t;
 		}
 			SDL_FreeSurface(loadedSurface);
 	}
 
-*/
-	SDL_Texture* newTexture = NULL;
-	SDL_Surface* loadedSurface = IMG_Load(src.c_str());
-	if(loadedSurface == NULL)
-	{ printf("fuck");}
-	newTexture = SDL_CreateTextureFromSurface(this->renderer, loadedSurface);
-	if(newTexture == NULL)
-	{printf("fuck2");}
-	Texture t(loadedSurface->w, loadedSurface->h);
-	t.texture = newTexture;
-	textureMap[src] = &t;
-	SDL_FreeSurface(loadedSurface);
 }
 
 TextureLoader::~TextureLoader()

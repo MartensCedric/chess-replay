@@ -1,7 +1,7 @@
 #include "render.h" 
 #include <stdio.h>
 #include <SDL2/SDL_ttf.h>
-
+#include "board.h"
 Render::Render(SDL_Window* window)
 {
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -12,7 +12,7 @@ Render::Render(SDL_Window* window)
 	}
 }
 
-void Render::drawBoard(int x, int y, int w, int h)
+void Render::renderTiles(int x, int y, int w, int h)
 {
 	for(int i = 0; i < 8; i++)
 	{
@@ -59,6 +59,12 @@ void Render::render(Texture* texture, int x, int y, int w, int h)
 	render(texture, x, y, w, h, NULL);
 }
 
+void Render::renderPieces(Board* board)
+{
+ 	//TODO implement iterator
+
+	
+}
 void Render::clear()
 {
 	this->clear(0xFF, 0xFF, 0xFF, 0xFF);
