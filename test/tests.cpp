@@ -102,6 +102,16 @@ BOOST_AUTO_TEST_CASE(notationKO)
 	BOOST_CHECK_THROW(new Pair("E4"), std::runtime_error); 	
 }
 
+BOOST_AUTO_TEST_CASE(pieceTypeToFilename)
+{
+	Piece pKW(true, PieceType::KING);
+	Piece pNB(false, PieceType::KNIGHT);
+	Piece pPW(true, PieceType::PAWN);
+	BOOST_CHECK_EQUAL("king_w.png", *Board::pieceToFilename(&pKW));
+	BOOST_CHECK_EQUAL("knight_b.png", *Board::pieceToFilename(&pNB));
+	BOOST_CHECK_EQUAL("pawn_w.png", *Board::pieceToFilename(&pPW));
+}
+
 BOOST_AUTO_TEST_CASE(castlingKO)
 {
 	Board b;

@@ -8,7 +8,6 @@
 #include "pgn.h"
 #include "textureLoader.h"
 #include <SDL2/SDL_image.h>
-const std::string SPR_KING_W = "images/pieces/king_w.png";
 
 int main(int argc, char* args[])
 {

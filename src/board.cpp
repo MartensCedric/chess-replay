@@ -2,6 +2,8 @@
 #include "piece.h"
 #include <stdexcept>
 #include <iostream>
+#include <string>
+
 Board::Board()
 {
 	reset();
@@ -90,6 +92,51 @@ void Board::castle(bool white, bool kingside)
 	
 	move(king, rank, newFileKing);
 	move(rook, rank, newFileRook);	
+}
+
+std::string* Board::pieceToFilename(Piece* piece)
+{
+	std::string* filename = new std::string("");
+	PieceType pt = piece->getPieceType();
+
+	switch(pt)
+	{
+		case PieceType::PAWN:
+			filename->append("pawn");
+			break;
+
+		case PieceType::BISHOP:
+			filename->append("bishop");
+			break;
+		
+		case PieceType::KNIGHT:
+			filename->append("knight");
+			break;
+		
+		case PieceType::ROOK:
+			filename->append("rook");
+			break;
+
+		case PieceType::KING:
+			filename->append("king");
+			break;
+
+		case PieceType::QUEEN:
+			filename->append("queen");
+			break;
+	}
+
+	filename->append("_");
+
+	if(piece->isWhite())
+	{
+		filename->append("w");
+	}else{
+		filename->append("b");
+	}
+
+	filename->append(".png");
+	return filename;
 }
 
 Board::~Board()
