@@ -5,7 +5,6 @@ class Piece
 {
 	PieceType pieceType;
 	const bool white;
-	
 	public:
 	Piece(bool white, PieceType pieceType):white(white){this->pieceType = pieceType;}
 	PieceType getPieceType() const{return pieceType;}

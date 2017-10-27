@@ -33,7 +33,6 @@ int main(int argc, char* args[])
 	textureLoader->loadTexture(IMG_PATH + "queen_b.png");
 	textureLoader->loadTexture(IMG_PATH + "king_w.png");
 	textureLoader->loadTexture(IMG_PATH + "king_b.png");
-
 	SDL_Event e;
 	while(running)
 	{
@@ -46,7 +45,7 @@ int main(int argc, char* args[])
 		}
 		render->clear(0x00, 0x00, 0x00, 0xFF);
 		render->renderTiles(56, 56, 544, 544);
-		render->renderPieces(board);
+		render->renderPieces(board, textureLoader);
 		render->update();
 	}
 

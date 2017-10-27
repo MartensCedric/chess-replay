@@ -4,6 +4,8 @@
 #include "board.h"
 #include <string>
 #include <iostream>
+#include "textureLoader.h"
+
 Render::Render(SDL_Window* window)
 {
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -61,28 +63,24 @@ void Render::render(Texture* texture, int x, int y, int w, int h)
 	render(texture, x, y, w, h, NULL);
 }
 
-void Render::renderPieces(Board* board)
+void Render::renderPieces(Board* board, TextureLoader* textureLoader)
 {
- 	//TODO implement iterator
-	//TODO attempt iteration [n * m]
-	/*
 	Piece** boardData = board->getBoardData();
 
 	for(int i = 0; i < 8; i++)
 	{
 		for(int j = 0; j < 8; j++)
 		{
-			Piece* p = boardData[i];
+			Piece* p = boardData[i * 8 + j % 8];
 			if(p != nullptr)
 			{
-				if(p->isWhite())
-				std::cout << "White " << std::endl;
-				else
-				std::cout << "Black" << std::endl;	
+				std::string* texturePath = TextureLoader::pieceToFilename(p);
+				*texturePath = "images/pieces/" + *texturePath;
+				Texture* texture = textureLoader->getTexture(*texturePath);
+				render(texture, j * 75, 640 - i * 75, 75, 75);
 			}
 		}
 	}
-	*/
 }
 void Render::clear()
 {

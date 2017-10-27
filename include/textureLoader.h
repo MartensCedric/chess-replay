@@ -12,9 +12,8 @@
 class TextureLoader
 {
 	SDL_Renderer* renderer;
-
-	public:
 	std::map<std::string, Texture*> textureMap;
+	public:
 	TextureLoader(SDL_Renderer* renderer);
 	~TextureLoader();
 	void loadTexture(const std::string& src);

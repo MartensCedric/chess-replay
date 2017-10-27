@@ -4,6 +4,7 @@
 #include <SDL2/SDL.h>
 #include "texture.h"
 #include "board.h"
+#include "textureLoader.h"
 class Render
 {
 	SDL_Renderer* renderer = NULL;
@@ -14,7 +15,7 @@ class Render
 	void render(Texture* texture, int x, int y);
 	void render(Texture* texture, int x, int y, int w, int h);
 	void render(Texture* texture, int x, int y, int w, int h, SDL_Rect* clip);
-	void renderPieces(Board* board);
+	void renderPieces(Board* board, TextureLoader* textureLoader);
 	void clear(Uint8 r, Uint8 g, Uint8 b, Uint8 a);
 	void clear();
 	void update();
