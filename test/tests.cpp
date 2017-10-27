@@ -13,6 +13,7 @@
 #include <streambuf>
 #include <stdexcept>
 #include "move.h"
+#include "textureLoader.h"
 
 std::string fileToString(std::string filePath)
 {
@@ -107,9 +108,9 @@ BOOST_AUTO_TEST_CASE(pieceTypeToFilename)
 	Piece pKW(true, PieceType::KING);
 	Piece pNB(false, PieceType::KNIGHT);
 	Piece pPW(true, PieceType::PAWN);
-	BOOST_CHECK_EQUAL("king_w.png", *Board::pieceToFilename(&pKW));
-	BOOST_CHECK_EQUAL("knight_b.png", *Board::pieceToFilename(&pNB));
-	BOOST_CHECK_EQUAL("pawn_w.png", *Board::pieceToFilename(&pPW));
+	BOOST_CHECK_EQUAL("king_w.png", *TextureLoader::pieceToFilename(&pKW));
+	BOOST_CHECK_EQUAL("knight_b.png", *TextureLoader::pieceToFilename(&pNB));
+	BOOST_CHECK_EQUAL("pawn_w.png", *TextureLoader::pieceToFilename(&pPW));
 }
 
 BOOST_AUTO_TEST_CASE(castlingKO)

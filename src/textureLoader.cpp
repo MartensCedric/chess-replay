@@ -1,6 +1,7 @@
 #include "textureLoader.h"
 #include <iostream>
 #include <SDL2/SDL_image.h>
+#include "piece.h"
 
 TextureLoader::TextureLoader(SDL_Renderer* renderer)
 : renderer(renderer)
@@ -33,7 +34,51 @@ void TextureLoader::loadTexture(const std::string& src)
 		}
 			SDL_FreeSurface(loadedSurface);
 	}
+}
 
+std::string* TextureLoader::pieceToFilename(Piece* piece)
+{
+	std::string* filename = new std::string("");
+	PieceType pt = piece->getPieceType();
+
+	switch(pt)
+	{
+		case PieceType::PAWN:
+			filename->append("pawn");
+			break;
+		
+		case PieceType::BISHOP:
+			filename->append("bishop");
+			break;
+
+		case PieceType::KNIGHT:
+			filename->append("knight");
+			break;
+
+		case PieceType::ROOK:
+			filename->append("rook");
+			break;
+
+		case PieceType::KING:
+			filename->append("king");
+			break;
+
+		case PieceType::QUEEN:
+			filename->append("queen");
+			break;
+	}
+
+	filename->append("_");
+	
+	if(piece->isWhite())
+	{
+		filename->append("w");
+	}else{
+		filename->append("b");
+	}
+
+	filename->append(".png");
+	return filename;
 }
 
 TextureLoader::~TextureLoader()

@@ -3,7 +3,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "board.h"
 #include <string>
-
+#include <iostream>
 Render::Render(SDL_Window* window)
 {
 	this->renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -64,15 +64,25 @@ void Render::render(Texture* texture, int x, int y, int w, int h)
 void Render::renderPieces(Board* board)
 {
  	//TODO implement iterator
-	Piece* boardData = board->getBoardData();
+	//TODO attempt iteration [n * m]
+	/*
+	Piece** boardData = board->getBoardData();
 
 	for(int i = 0; i < 8; i++)
 	{
 		for(int j = 0; j < 8; j++)
 		{
-			
+			Piece* p = boardData[i];
+			if(p != nullptr)
+			{
+				if(p->isWhite())
+				std::cout << "White " << std::endl;
+				else
+				std::cout << "Black" << std::endl;	
+			}
 		}
 	}
+	*/
 }
 void Render::clear()
 {
