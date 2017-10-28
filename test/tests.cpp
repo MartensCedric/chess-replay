@@ -13,7 +13,7 @@
 #include <streambuf>
 #include <stdexcept>
 #include "move.h"
-#include "textureLoader.h"
+#include "textureloader.h"
 
 std::string fileToString(std::string filePath)
 {

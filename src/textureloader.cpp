@@ -1,4 +1,4 @@
-#include "textureLoader.h"
+#include "textureloader.h"
 #include <iostream>
 #include <SDL2/SDL_image.h>
 #include "piece.h"

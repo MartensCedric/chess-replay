@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 #include "texture.h"
 #include "board.h"
-#include "textureLoader.h"
+#include "textureloader.h"
 class Render
 {
 	SDL_Renderer* renderer = NULL;

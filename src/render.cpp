@@ -4,7 +4,7 @@
 #include "board.h"
 #include <string>
 #include <iostream>
-#include "textureLoader.h"
+#include "textureloader.h"
 
 Render::Render(SDL_Window* window)
 {

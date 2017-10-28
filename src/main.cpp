@@ -6,7 +6,7 @@
 #include "render.h"
 #include "screen.h"
 #include "pgn.h"
-#include "textureLoader.h"
+#include "textureloader.h"
 #include <SDL2/SDL_image.h>
 
 const std::string IMG_PATH = "images/pieces/";
