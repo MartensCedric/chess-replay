@@ -77,7 +77,7 @@ void Render::renderPieces(Board* board, TextureLoader* textureLoader)
 				std::string* texturePath = TextureLoader::pieceToFilename(p);
 				*texturePath = "images/pieces/" + *texturePath;
 				Texture* texture = textureLoader->getTexture(*texturePath);
-				render(texture, j * 75, 640 - i * 75, 75, 75);
+				render(texture, j * 68 + 50, 525 - i * 68, 75, 75);
 			}
 		}
 	}

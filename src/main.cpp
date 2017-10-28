@@ -13,7 +13,6 @@ const std::string IMG_PATH = "images/pieces/";
 
 int main(int argc, char* args[])
 {
-
 	bool running = true;
 	Board* board = new Board();
 	Screen* screen = new Screen(800, 600);
