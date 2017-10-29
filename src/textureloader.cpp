@@ -1,6 +1,7 @@
 #include "textureloader.h"
 #include <iostream>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include "piece.h"
 
 TextureLoader::TextureLoader(SDL_Renderer* renderer)
@@ -10,6 +11,11 @@ TextureLoader::TextureLoader(SDL_Renderer* renderer)
 	if(!(IMG_Init(imgFlags) & imgFlags))
 	{
 		printf("SDL_image could not initialize! %s\n", IMG_GetError());
+	}
+
+	if(TTF_Init() == -1)
+	{
+		printf("SDL_ttf could not initialize! %s\n", TTF_GetError());
 	}
 }
 
@@ -89,4 +95,6 @@ TextureLoader::~TextureLoader()
 	}
 		
 	textureMap.clear();
+	TTF_Quit();
+	IMG_Quit();
 }

@@ -10,7 +10,7 @@ CC = g++
 COMPILER_FLAGS = -w -I$(INC_DIR)
 
 #LINKER_FLAGS specifies the libraries we're linking against
-LINKER_FLAGS = -lSDL2 -lSDL2_image
+LINKER_FLAGS = -lSDL2 -lSDL2_image -lSDL2_ttf
 
 #OBJ_NAME specifies the name of our executable
 OBJ_NAME = chess_replay

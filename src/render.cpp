@@ -82,6 +82,12 @@ void Render::renderPieces(Board* board, TextureLoader* textureLoader)
 		}
 	}
 }
+
+void Render::renderStage(Stage* stage)
+{
+
+}
+
 void Render::clear()
 {
 	this->clear(0xFF, 0xFF, 0xFF, 0xFF);

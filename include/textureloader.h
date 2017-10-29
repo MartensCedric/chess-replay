@@ -8,6 +8,7 @@
 #include <iostream>
 #include "piece.h"
 #include "piecetype.h"
+#include <SDL2/SDL_ttf.h>
 
 class TextureLoader
 {
