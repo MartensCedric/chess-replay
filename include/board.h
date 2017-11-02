@@ -14,6 +14,7 @@ class Board
 	void capture(Piece* attacker, Piece* defender);
 	void castle(bool white, bool kingside);
 	void reset();
+	void rotate();
 	Piece** getBoardData() { return boardData[0]; }
 	private:
 	void ensureBoundaries(int rank, int file);

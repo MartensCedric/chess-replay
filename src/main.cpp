@@ -39,7 +39,6 @@ int main(int argc, char* args[])
 	textureLoader->loadTexture(IMG_PATH + "king_b.png");
 
 	gDefaultFont = TTF_OpenFont("fonts/prozalibre.ttf", 16);
-
 	SDL_Event e;
 	while(running)
 	{

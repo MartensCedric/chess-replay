@@ -32,6 +32,28 @@ void Board::move(int rankSrc, int fileSrc, int rankDest, int fileDest)
 {
 	move(getPieceAt(rankSrc, fileSrc), rankDest, fileDest);
 }
+
+void Board::rotate()
+{
+	Piece* boardTemp[8][8];
+	for(int i = 0; i < 8; i++)
+	{
+		for(int j = 0; j < 8; j++)
+		{
+			boardTemp[7-i][7-j] = boardData[i][j];
+		}
+	}
+
+
+	for(int i = 0; i < 8; i++)
+	{
+		for(int j = 0; j < 8; j++)
+		{
+			boardData[i][j] = boardTemp[i][j];
+		}
+	}
+}
+
 void Board::ensureBoundaries(int rank, int file)
 {
 	if(rank >= 8 || rank < 0 
@@ -66,7 +88,7 @@ void Board::reset()
 			isWhite = false;
 			rankPos = 7;
 		}
-		
+
 		boardData[rankPos][0] = new Piece(isWhite, PieceType::ROOK);
 		boardData[rankPos][7] = new Piece(isWhite, PieceType::ROOK);
 		boardData[rankPos][1] = new Piece(isWhite, PieceType::KNIGHT);
@@ -81,15 +103,15 @@ void Board::reset()
 void Board::castle(bool white, bool kingside)
 {
 	int rank = white ? 0 : 7;
-	
+
 	int currFileRook = kingside ? 7 : 0;
 
 	int newFileKing = kingside ? 6 : 2;
 	int newFileRook = kingside ? 5 : 3;
-	
+
 	Piece* rook = getPieceAt(rank, currFileRook);
 	Piece* king = getPieceAt(rank, 4);
-	
+
 	move(king, rank, newFileKing);
 	move(rook, rank, newFileRook);	
 }

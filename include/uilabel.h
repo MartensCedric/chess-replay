@@ -10,8 +10,8 @@ class UiLabel : public UiElement
 {
 	std::string text;
 	TTF_Font* font;
-	SDL_Color color = { 255, 255, 255 }
-	Texture* texture;
+	SDL_Color color = { 255, 255, 255 };
+	Texture* texture = nullptr;
 	public:
 	UiLabel(int x, int y, std::string text) : UiElement(x, y), text(text) {} 
 	void draw(SDL_Renderer* renderer) override;
